@@ -17,9 +17,13 @@ import com.caucho.hessian.io.Hessian2Output;
 class TestHessian {
 
 	@Test
-	@Disabled
 	public void testTime() throws Exception {
 		assertSerializeAndDeserializeAndCompare(Year.of(2017));
+	}
+
+	@Test
+	public void testSqlDate() throws Exception {
+		assertSerializeAndDeserializeAndCompare(new java.sql.Date(1000));
 	}
 
 	@Test
@@ -28,7 +32,6 @@ class TestHessian {
 	}
 
 	@Test
-	@Disabled
 	public void testBigDecimal() throws Exception {
 		assertSerializeAndDeserializeAndCompare(new BigDecimal("42.22"));
 	}
