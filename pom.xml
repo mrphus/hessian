@@ -3,14 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.caucho</groupId>
+  <groupId>eu.morphus</groupId>
   <artifactId>hessian</artifactId>
-  <version>@VERSION@</version>
+  <version>9.1.0</version>
   
   <packaging>jar</packaging>
   <name>Hessian</name>
   <description>Hessian is a compact binary protocol for connecting web services</description>
   <url>http://hessian.caucho.com</url>
+
+<properties>
+                <java.version>1.8</java.version>
+                <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        </properties>
 
   <licenses>
     <license>
@@ -37,10 +42,20 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
-  
-  <scm>
-    <connection>scm:svn:svn://svn.caucho.com/home/svn/svnroot/resin/trunk/modules/hessian</connection>
-    <url>svn://svn.caucho.com/home/svn/svnroot/resin/trunk/modules/hessian</url>
-  </scm>
+
+<build>
+<plugins>
+<plugin>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-compiler-plugin</artifactId>
+                                <version>2.5.1</version>
+                                <configuration>
+                                        <source>${java.version}</source>
+                                        <target>${java.version}</target>
+                                        <encoding>${project.build.sourceEncoding}</encoding>
+                                </configuration>
+                        </plugin> 
+</plugins>
+</build>
 </project>
 
