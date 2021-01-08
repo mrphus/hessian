@@ -5,10 +5,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>eu.morphus</groupId>
 	<artifactId>hessian</artifactId>
-	<version>4.0.55.0-SNAPSHOT</version>
+	<version>4.0.55.0</version>
 
 	<packaging>jar</packaging>
-	<name>Hessian</name>
+	<name>${project.groupId}:${project.artifactId}</name>
 	<description>Hessian is a compact binary protocol for connecting web services. This project is just enhancing some aspects.</description>
 	<url>http://hessian.caucho.com</url>
 
@@ -32,7 +32,32 @@
 			<organization>Caucho Technology, Inc</organization>
 			<organizationUrl>https://www.caucho.com</organizationUrl>
 		</developer>
+		<developer>
+			<name>Michael Zapetik</name>
+			<email>mrphus@morphus.eu</email>
+			<organization>private</organization>
+		</developer>
 	</developers>
+
+	<!-- Source Control Information, Github Stuff -->
+	<scm>
+		<!-- Should be format scm:git:git or scm:git:https -->
+		<connection>scm:git@github.com:mrphus/hessian.git </connection>
+		<developerConnection>scm:git@github.com:mrphus/hessian.git</developerConnection>
+		<url>https://github.com/mrphus/hessian</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 
 	<dependencies>
 		<dependency>
@@ -66,6 +91,60 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M5</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<doclint>none</doclint>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.8</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
