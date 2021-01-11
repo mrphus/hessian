@@ -12,4 +12,4 @@ mvn versions:set -DnewVersion=${VERSION} -DgenerateBackupPoms=false
 mvn clean deploy -Prelease --settings ~/.m2/ossrh.xml
 git checkout .
 git tag $VERSION
-git push tags
+git push --tags
